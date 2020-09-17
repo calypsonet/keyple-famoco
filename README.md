@@ -9,5 +9,3 @@ Should be compatible with FX100, FX200 and FC300 series.
 reading,
 increase counters,
 decrease counters.
-
-**validator-app**: Demo application using Keyple Famoco Se plugin and Keyple AndroidNfc plugin, allowing to test validation usecase.

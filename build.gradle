@@ -25,7 +25,6 @@ allprojects {
     group 'org.eclipse.keyple'
     apply plugin: 'org.jetbrains.dokka'
     apply plugin: "com.diffplug.gradle.spotless"
-    project.version = '1.0.1'
     repositories {
         mavenLocal()
         mavenCentral()

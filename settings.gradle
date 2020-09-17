@@ -1,4 +1,3 @@
 rootProject.name='KeypleFamoco'
 include ':example-app'
 include ':keyple-plugins:famoco-se-communication'
-include ':validator-app'

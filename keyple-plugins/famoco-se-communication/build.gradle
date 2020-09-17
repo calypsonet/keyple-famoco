@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 archivesBaseName = "keyple-android-plugin-famoco-se-communication"
+
+group 'org.eclipse.keyple'
 project.description = 'Keyple Plugin based on Famoco Se Communication library'
 
 android {
@@ -101,7 +103,7 @@ artifacts {
     archives androidSourcesJar, javadocJar
 }
 
-task installPlugin{
+task installPlugin {
     group 'keyple'
     description 'Builds and installs the keyple Famoco SE Communication library into maven local repository'
     dependsOn ':keyple-plugins:famoco-se-communication:uploadArchives'
@@ -127,4 +129,12 @@ dependencies {
     testImplementation files('libs/lib-secommunication-1.7.0.jar')
     /** Mocking for tests **/
     testImplementation "io.mockk:mockk:$mockk_version"
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: mavenLocal().url)
+        }
+    }
 }
