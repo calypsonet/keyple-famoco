@@ -11,12 +11,18 @@
  ********************************************************************************/
 package org.eclipse.keyple.famoco.se.plugin
 
-import org.eclipse.keyple.core.common.KeypleReaderExtension
+import org.eclipse.keyple.core.common.CommonsApiProperties
+import org.eclipse.keyple.core.plugin.PluginApiProperties
+import org.eclipse.keyple.core.plugin.spi.PluginFactorySpi
+import org.eclipse.keyple.core.plugin.spi.PluginSpi
 
-// Allow to provide a non ambiguous name for the reader while keeping it internal
-interface AndroidFamocoReader: KeypleReaderExtension {
-    companion object {
-        const val READER_NAME = "AndroidFamocoReader"
-        const val FLAG_READER_RESET_STATE = "FLAG_READER_RESET_STATE"
-    }
+class AndroidFamocoPluginFactoryAdapter : AndroidFamocoPluginFactory, PluginFactorySpi {
+
+    override fun getPluginName(): String = AndroidFamocoPlugin.PLUGIN_NAME
+
+    override fun getPlugin(): PluginSpi = AndroidFamocoPluginAdapter()
+
+    override fun getCommonsApiVersion(): String = CommonsApiProperties.VERSION
+
+    override fun getPluginApiVersion(): String = PluginApiProperties.VERSION
 }

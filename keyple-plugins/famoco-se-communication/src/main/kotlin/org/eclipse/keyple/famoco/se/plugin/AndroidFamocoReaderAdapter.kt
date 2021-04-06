@@ -13,14 +13,15 @@ package org.eclipse.keyple.famoco.se.plugin
 
 import com.famoco.secommunication.ALPARProtocol
 import com.famoco.secommunication.SmartcardReader
-import org.eclipse.keyple.core.plugin.AbstractLocalReader
-import org.eclipse.keyple.core.service.util.ContactCardCommonProtocols
+import org.eclipse.keyple.core.plugin.spi.reader.ReaderSpi
 import org.eclipse.keyple.core.util.ByteArrayUtil
-import org.eclipse.keyple.famoco.se.plugin.AndroidFamocoPlugin.Companion.PLUGIN_NAME
 import org.eclipse.keyple.famoco.se.plugin.AndroidFamocoReader.Companion.READER_NAME
+import org.eclipse.keyple.famoco.se.plugin.utils.ContactCardCommonProtocols
 import timber.log.Timber
 
-internal object AndroidFamocoReaderImpl : AbstractLocalReader(PLUGIN_NAME, READER_NAME), AndroidFamocoReader {
+internal class AndroidFamocoReaderAdapter :
+    ReaderSpi,
+    AndroidFamocoReader {
 
     private val parameters: MutableMap<String, String> = HashMap()
 
@@ -65,11 +66,6 @@ internal object AndroidFamocoReaderImpl : AbstractLocalReader(PLUGIN_NAME, READE
 
     override fun checkCardPresence(): Boolean {
         Timber.d("checkSePresence()")
-        return isCardPresent
-    }
-
-    override fun isCardPresent(): Boolean {
-        // FIXED: Broken in famoco lib?
         return mSmarcardReader.isCardPresent
     }
 
@@ -87,11 +83,21 @@ internal object AndroidFamocoReaderImpl : AbstractLocalReader(PLUGIN_NAME, READE
         return readerProtocolName == ContactCardCommonProtocols.ISO_7816_3.name
     }
 
-    override fun deactivateReaderProtocol(readerProtocolName: String?) {
+    override fun isProtocolSupported(readerProtocol: String?): Boolean {
+        return readerProtocol == ContactCardCommonProtocols.ISO_7816_3.name
+    }
+
+    override fun activateProtocol(readerProtocol: String?) {
         // Do nothing
     }
 
-    override fun activateReaderProtocol(readerProtocolName: String?) {
+    override fun deactivateProtocol(readerProtocol: String?) {
+        // Do nothing
+    }
+
+    override fun getName(): String = READER_NAME
+
+    override fun unregister() {
         // Do nothing
     }
 }

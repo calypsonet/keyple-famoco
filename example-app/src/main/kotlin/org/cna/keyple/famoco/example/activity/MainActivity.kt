@@ -43,7 +43,7 @@ import org.eclipse.keyple.core.service.exception.KeyplePluginNotFoundException
 import org.eclipse.keyple.core.service.exception.KeypleReaderException
 import org.eclipse.keyple.core.service.util.ContactCardCommonProtocols
 import org.eclipse.keyple.core.util.ByteArrayUtil
-import org.eclipse.keyple.famoco.se.plugin.AndroidFamocoPluginFactory
+import org.eclipse.keyple.famoco.se.plugin.AndroidFamocoPluginFactoryProvider
 import org.eclipse.keyple.famoco.se.plugin.AndroidFamocoReader
 import org.eclipse.keyple.plugin.android.nfc.AndroidNfcPluginFactory
 import org.eclipse.keyple.plugin.android.nfc.AndroidNfcProtocolSettings
@@ -74,7 +74,8 @@ class MainActivity : AbstractExampleActivity() {
             ReaderObservationExceptionHandler { pluginName, readerName, e ->
                 Timber.e("An unexpected reader error occurred: $pluginName:$readerName : $e")
             }))
-        val samPlugin = SmartCardService.getInstance().registerPlugin(AndroidFamocoPluginFactory())
+        val androidFamocoPluginFactory = AndroidFamocoPluginFactoryProvider.getFactory()
+        val samPlugin = SmartCardService.getInstance().registerPlugin(androidFamocoPluginFactory)
 
         // Configuration of AndroidNfc Reader
         poReader = nfcPlugin.getReader(AndroidNfcReader.READER_NAME) as AndroidNfcReader

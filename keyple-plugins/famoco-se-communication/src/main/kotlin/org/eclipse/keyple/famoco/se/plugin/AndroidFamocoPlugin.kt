@@ -11,8 +11,10 @@
  ********************************************************************************/
 package org.eclipse.keyple.famoco.se.plugin
 
+import org.eclipse.keyple.core.common.KeyplePluginExtension
+
 // Allow to provide a non ambiguous name for the plugin while keeping it internal
-interface AndroidFamocoPlugin {
+interface AndroidFamocoPlugin: KeyplePluginExtension {
     companion object {
         const val PLUGIN_NAME = "AndroidFamocoPlugin"
     }

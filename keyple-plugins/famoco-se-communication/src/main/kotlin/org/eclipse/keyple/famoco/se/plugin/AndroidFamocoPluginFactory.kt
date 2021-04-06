@@ -11,16 +11,6 @@
  ********************************************************************************/
 package org.eclipse.keyple.famoco.se.plugin
 
-import org.eclipse.keyple.core.service.Plugin
-import org.eclipse.keyple.core.service.PluginFactory
+import org.eclipse.keyple.core.common.KeyplePluginExtensionFactory
 
-class AndroidFamocoPluginFactory : PluginFactory {
-
-    override fun getPluginName(): String {
-        return AndroidFamocoPluginImpl.name
-    }
-
-    override fun getPlugin(): Plugin {
-        return AndroidFamocoPluginImpl
-    }
-}
+interface AndroidFamocoPluginFactory : KeyplePluginExtensionFactory

@@ -161,7 +161,8 @@ abstract class AbstractExampleActivity : AppCompatActivity(), NavigationView.OnN
 
         return try {
             if (samReader.isCardPresent) {
-                val calypsoSam = samSelection.processExplicitSelections(samReader).activeSmartCard as CalypsoSam
+                val results = samSelection.processExplicitSelections(samReader)
+                val calypsoSam = results.activeSmartCard as CalypsoSam
                 CardResource<CalypsoSam>(samReader, calypsoSam)
             } else {
                 addResultEvent("Error: Sam is not present in the reader")

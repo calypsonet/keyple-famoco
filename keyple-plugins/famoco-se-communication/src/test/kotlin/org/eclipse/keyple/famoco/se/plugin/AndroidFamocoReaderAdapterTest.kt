@@ -20,7 +20,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
-internal class AndroidFamocoReaderImplTest {
+internal class AndroidFamocoReaderAdapterTest {
 
     companion object {
         internal const val PLUGIN_NAME = "AndroidFamocoPlugin"
@@ -29,7 +29,7 @@ internal class AndroidFamocoReaderImplTest {
     }
 
     lateinit var nativeReader: SmartcardReader
-    lateinit var reader: AndroidFamocoReaderImpl
+    lateinit var reader: AndroidFamocoReaderAdapter
 
     @Before
     fun setUp() {
@@ -38,7 +38,7 @@ internal class AndroidFamocoReaderImplTest {
         nativeReader = mockReader()
 
         // instantiate reader with nativeReader
-        reader = AndroidFamocoReaderImpl
+        reader = AndroidFamocoReaderAdapter()
     }
 
     @After
@@ -66,7 +66,7 @@ internal class AndroidFamocoReaderImplTest {
 
     @Test
     fun isSEPresent() {
-        Assert.assertEquals(true, reader.isSePresent)
+        Assert.assertEquals(true, reader.checkCardPresence())
     }
 
     fun getNativeReaderName(): String {
