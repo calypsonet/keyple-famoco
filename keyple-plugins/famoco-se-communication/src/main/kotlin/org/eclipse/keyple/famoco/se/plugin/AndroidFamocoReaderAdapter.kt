@@ -45,8 +45,8 @@ internal class AndroidFamocoReaderAdapter :
         return apduOut
     }
 
-    override fun getATR(): ByteArray? {
-        Timber.d("getATR()")
+    override fun getAtr(): ByteArray? {
+        Timber.d("getAtr()")
         Timber.d("ATR = ${ByteArrayUtil.toHex(atr)}")
         return atr
     }
